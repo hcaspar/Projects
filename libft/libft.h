@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:52 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/02 16:57:13 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/07 14:22:18 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
-t_list				*ft_lstnew(void const *content, size_t content_size);
+char				*ft_strrev(char *str);
+t_list			*ft_lstnew(void const *content, size_t content_size);
 
 #endif

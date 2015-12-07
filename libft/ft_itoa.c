@@ -6,13 +6,13 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 16:00:47 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/02 12:56:42 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/07 14:20:11 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_sub(int len, long n_cpy, char *str, int swap)
+static char	*ft_sub(int len, long n_cpy, char *str, int swap)
 {
 	while (len != swap)
 	{
