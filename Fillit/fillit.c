@@ -6,32 +6,11 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/11 16:54:12 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/11 17:25:47 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-
-static void		ft_print_error(void)
-{
-	write(1, "error\n", 6);
-	exit(0);
-}
-
-static void		ft_print_tab(int ret, char tab[4 * ((ret + 1) / 21)][5])
-{
-	int		i;
-
-	i = 0;
-	while (i < 4 * ((ret + 1) / 21))
-	{
-		ft_putendl(tab[i]);
-		i++;
-	}
-}
+#include "more.h"
 
 static void		ft_check_map(int ret, char *buf)
 {
