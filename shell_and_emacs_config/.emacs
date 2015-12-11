@@ -6,7 +6,7 @@
 ;    By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/12/11 10:19:23 by hcaspar           #+#    #+#              ;
-;    Updated: 2015/12/11 10:25:26 by hcaspar          ###   ########.fr        ;
+;    Updated: 2015/12/11 10:38:19 by hcaspar          ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -43,4 +43,7 @@
 (add-hook 'change-major-mode-hook '(lambda () (highlight-regexp "	+$" 'hi-blue)))
 
 ;; Change backup directory
-(setq backup-directory-alist '("." . "~/.emacs.d/saves/"))
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves/")))
+
+;; Replace yes and no by y and n
+(defalias 'yes-or-no-p 'y-or-n-p)
