@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 17:53:06 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 18:23:27 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		ft_check_block(int size, char tab[size][5], t_compt g)
 	}
 	if (t != 0)
 		ft_print_error();
-	ft_create_map(size, tab);
+	ft_create_map(size, tab, 2);
 }
 
 static void		ft_check_map(int ret, char *buf)

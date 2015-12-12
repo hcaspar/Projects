@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:18:36 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 16:08:00 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 18:24:38 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ typedef struct	s_compt
 
 void			ft_print_error(void);
 void			ft_print_tab(int size, char tab[size][5]);
-void			ft_create_map(int size, char tab[size][5]);
+void			ft_create_map(int size, char tab[size][5], int i);
 
 #endif

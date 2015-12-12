@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 16:41:17 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 18:30:28 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,38 @@ void		ft_print_tab(int size, char tab[size][5])
 	}
 }
 
-void		ft_create_map(int size, char tab[size][5])
+void		ft_free_tab(char **grid)
+{
+	t_compt	g;
+
+	g.i = 0;
+	g.j = 0;
+	while (grid[g.i])
+		g.i++;
+	while (g.i != 0)
+	{
+		if (grid[g.i])
+			free(grid[g.i]);
+		g.i--;
+	}
+	if (grid)
+		free(grid);
+}
+
+void		ft_create_map(int size, char tab[size][5], int i)
 {
 	t_compt	g;
 	char	**grid;
 
 	g.i = 0;
-	if (!(grid = (char**)malloc(sizeof(char*) * (10 + 1))))
+	if (!(grid = (char**)malloc(sizeof(char*) * (i + 1))))
 		ft_print_error();
-	while (g.i < 10)
+	while (g.i < i)
 	{
 		g.j = 0;
-		if (!(grid[g.i] = ft_strnew(10)))
+		if (!(grid[g.i] = ft_strnew(i)))
 			ft_print_error();
-		while (g.j < 10)
+		while (g.j < i)
 		{
 			grid[g.i][g.j] = '.';
 			g.j++;
@@ -51,7 +69,6 @@ void		ft_create_map(int size, char tab[size][5])
 		g.i++;
 	}
 	grid[g.i] = NULL;
-	ft_print_tab(size, tab);
 	g.i = 0;
 	g.j = 0;
 	while (grid[g.i])
@@ -59,4 +76,6 @@ void		ft_create_map(int size, char tab[size][5])
 		ft_putendl(grid[g.i]);
 		g.i++;
 	}
+	ft_free_tab(grid);
+	ft_print_tab(size, tab);
 }
