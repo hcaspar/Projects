@@ -6,13 +6,14 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 13:27:48 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 16:00:24 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more.h"
 
-static int		ft_recursiv_check(int size, char tab[size][5], int i, int j, int t)
+static int		ft_recursiv_check(int size, char tab[size][5], int i, int j, \
+									int t)
 {
 	if (tab[i][j + 1] == '#')
 	{
@@ -60,20 +61,24 @@ static void		ft_check_block(int size, char tab[size][5], int i, int j)
 	}
 	if (t != 0)
 		ft_print_error();
-	ft_print_tab(size, tab);
+	ft_create_map(size, tab);
 }
 
 static void		ft_check_map(int ret, char *buf)
 {
 	int		i;
 	int		j;
+	int		compt;
 
 	i = 0;
 	j = 1;
+	compt = 0;
 	if ((ret + 1) % 21 != 0)
 		ft_print_error();
 	while (buf[i])
 	{
+		if (buf[i] == '#')
+			compt++;
 		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
 			ft_print_error();
 		if (buf[i] == '\n' && (i + 1) % 21 == 0)
@@ -82,6 +87,8 @@ static void		ft_check_map(int ret, char *buf)
 			ft_print_error();
 		i++;
 	}
+	if (compt != ((ret + 1) / 21) * 4)
+		ft_print_error();
 }
 
 static void		ft_char_to_tab(int size, char *buf)
