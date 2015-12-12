@@ -6,58 +6,63 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 16:00:24 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 17:53:06 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more.h"
 
-static int		ft_recursiv_check(int size, char tab[size][5], int i, int j, \
-									int t)
+static int		ft_recursiv_check(int size, char tab[size][5], t_compt g, int t)
 {
-	if (tab[i][j + 1] == '#')
+	if (tab[g.i][g.j + 1] == '#')
 	{
-		tab[i][j + 1] = 'A' + (i / 4);
-		t = ft_recursiv_check(size, tab, i, j + 1, t + 1);
+		tab[g.i][g.j + 1] = 'A' + (g.i / 4);
+		g.j++;
+		t = ft_recursiv_check(size, tab, g, t + 1);
+		g.j--;
 	}
-	if (j != 0 && tab[i][j - 1] == '#')
+	if (g.j != 0 && tab[g.i][g.j - 1] == '#')
 	{
-		tab[i][j - 1] = 'A' + (i / 4);
-		t = ft_recursiv_check(size, tab, i, j - 1, t + 1);
+		tab[g.i][g.j - 1] = 'A' + (g.i / 4);
+		g.j--;
+		t = ft_recursiv_check(size, tab, g, t + 1);
+		g.j++;
 	}
-	if (tab[i + 1][j] == '#' && i + 1 != (i / 4) * 4 + 4)
+	if (tab[g.i + 1][g.j] == '#' && g.i + 1 != (g.i / 4) * 4 + 4)
 	{
-		tab[i + 1][j] = 'A' + (i / 4);
-		t = ft_recursiv_check(size, tab, i + 1, j, t + 1);
+		tab[g.i + 1][g.j] = 'A' + (g.i / 4);
+		g.i++;
+		t = ft_recursiv_check(size, tab, g, t + 1);
+		g.i--;
 	}
 	if (t > 4)
 		return (0);
 	return (t);
 }
 
-static void		ft_check_block(int size, char tab[size][5], int i, int j)
+static void		ft_check_block(int size, char tab[size][5], t_compt g)
 {
 	int		t;
 
 	t = 0;
-	while (t < 4 && i < size)
+	while (t < 4 && g.i < size)
 	{
-		while (tab[i][j] != '#' && tab[i][j] != '\0')
-			j++;
-		if (tab[i][j] == '#')
+		while (tab[g.i][g.j] != '#' && tab[g.i][g.j] != '\0')
+			g.j++;
+		if (tab[g.i][g.j] == '#')
 		{
-			tab[i][j] = 'A' + (i / 4);
-			if ((t = ft_recursiv_check(size, tab, i, j, 1)) != 4)
+			tab[g.i][g.j] = 'A' + (g.i / 4);
+			if ((t = ft_recursiv_check(size, tab, g, 1)) != 4)
 				ft_print_error();
 			t = 0;
-			i = (i / 4) * 4 + 4;
+			g.i = (g.i / 4) * 4 + 4;
 		}
 		else
 		{
 			t++;
-			i++;
+			g.i++;
 		}
-		j = 0;
+		g.j = 0;
 	}
 	if (t != 0)
 		ft_print_error();
@@ -93,27 +98,26 @@ static void		ft_check_map(int ret, char *buf)
 
 static void		ft_char_to_tab(int size, char *buf)
 {
-	int		i;
-	int		j;
+	t_compt g;
 	int		k;
 	char	tab[size][5];
 
-	i = 0;
+	g.i = 0;
 	k = 0;
-	while (i < size)
+	while (g.i < size)
 	{
-		j = 0;
-		while (j < 4)
-			tab[i][j++] = buf[k++];
-		tab[i][j] = '\0';
+		g.j = 0;
+		while (g.j < 4)
+			tab[g.i][g.j++] = buf[k++];
+		tab[g.i][g.j] = '\0';
 		k++;
 		if (buf[k] == '\n' && buf[k] != '\0')
 			k++;
-		i++;
+		g.i++;
 	}
-	i = 0;
-	j = 0;
-	ft_check_block(size, tab, i, j);
+	g.i = 0;
+	g.j = 0;
+	ft_check_block(size, tab, g);
 }
 
 int				main(int ac, char **av)
