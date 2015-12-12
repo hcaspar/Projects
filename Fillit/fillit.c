@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/12 13:17:24 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 13:27:48 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 static int		ft_recursiv_check(int size, char tab[size][5], int i, int j, int t)
 {
-	if (tab[i][j + 1] == '#' && t < 4)
+	if (tab[i][j + 1] == '#')
 	{
 		tab[i][j + 1] = 'A' + (i / 4);
 		t = ft_recursiv_check(size, tab, i, j + 1, t + 1);
 	}
-	if (j != 0 && tab[i][j - 1] == '#' && t < 4)
+	if (j != 0 && tab[i][j - 1] == '#')
 	{
 		tab[i][j - 1] = 'A' + (i / 4);
 		t = ft_recursiv_check(size, tab, i, j - 1, t + 1);
 	}
-	if (tab[i + 1][j] == '#' && t < 4)
+	if (tab[i + 1][j] == '#' && i + 1 != (i / 4) * 4 + 4)
 	{
 		tab[i + 1][j] = 'A' + (i / 4);
 		t = ft_recursiv_check(size, tab, i + 1, j, t + 1);
 	}
+	if (t > 4)
+		return (0);
 	return (t);
 }
 
