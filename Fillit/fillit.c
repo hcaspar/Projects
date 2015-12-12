@@ -6,34 +6,59 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/11 19:36:26 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/12 13:17:24 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more.h"
 
-static void		ft_recursiv_check(int size, char tab[size][5], int i, int j)
+static int		ft_recursiv_check(int size, char tab[size][5], int i, int j, int t)
 {
-	if (tab[i][j + 1] == '#')
-		ft_recursiv_check(size, tab, i, j + 1);
-	if (tab[i + 1][j] == '#')
-		ft_recursiv_check(size, tab, i + 1, j);
-	else
-		ft_print_error();
+	if (tab[i][j + 1] == '#' && t < 4)
+	{
+		tab[i][j + 1] = 'A' + (i / 4);
+		t = ft_recursiv_check(size, tab, i, j + 1, t + 1);
+	}
+	if (j != 0 && tab[i][j - 1] == '#' && t < 4)
+	{
+		tab[i][j - 1] = 'A' + (i / 4);
+		t = ft_recursiv_check(size, tab, i, j - 1, t + 1);
+	}
+	if (tab[i + 1][j] == '#' && t < 4)
+	{
+		tab[i + 1][j] = 'A' + (i / 4);
+		t = ft_recursiv_check(size, tab, i + 1, j, t + 1);
+	}
+	return (t);
 }
 
 static void		ft_check_block(int size, char tab[size][5], int i, int j)
 {
-	while (i % 4 != 0 || i == 0)
+	int		t;
+
+	t = 0;
+	while (t < 4 && i < size)
 	{
 		while (tab[i][j] != '#' && tab[i][j] != '\0')
 			j++;
 		if (tab[i][j] == '#')
-			ft_recursiv_check(size, tab, i, j);
+		{
+			tab[i][j] = 'A' + (i / 4);
+			if ((t = ft_recursiv_check(size, tab, i, j, 1)) != 4)
+				ft_print_error();
+			t = 0;
+			i = (i / 4) * 4 + 4;
+		}
+		else
+		{
+			t++;
+			i++;
+		}
 		j = 0;
-		i++;
 	}
-	ft_print_error();
+	if (t != 0)
+		ft_print_error();
+	ft_print_tab(size, tab);
 }
 
 static void		ft_check_map(int ret, char *buf)
@@ -70,9 +95,7 @@ static void		ft_char_to_tab(int size, char *buf)
 	{
 		j = 0;
 		while (j < 4)
-		{
 			tab[i][j++] = buf[k++];
-		}
 		tab[i][j] = '\0';
 		k++;
 		if (buf[k] == '\n' && buf[k] != '\0')
