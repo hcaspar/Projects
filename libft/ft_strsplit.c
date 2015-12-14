@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 21:07:33 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/11/29 17:06:41 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/14 14:07:06 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char		**ft_strsplit(char const *s, char c)
 
 	i = 0;
 	nb = 0;
+	if (!s)
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] != c)

@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 13:26:17 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/11/24 14:52:11 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/14 13:59:59 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char const *s, int fd)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		ft_putchar_fd(s[i], fd);
 		i++;

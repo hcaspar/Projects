@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 19:44:55 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/11/29 17:01:23 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/14 14:06:06 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strtrim(char const *s)
 	int		j;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	j = ft_strlen(s);
 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;

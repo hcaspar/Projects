@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:57:15 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/11/24 14:04:55 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/14 13:59:21 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putendl(char const *s)
 	int i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		ft_putchar(s[i]);
 		i++;

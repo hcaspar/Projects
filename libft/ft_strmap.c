@@ -6,7 +6,7 @@
 /*   By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:18:50 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/11/28 16:50:19 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/14 14:10:26 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	char	*new;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	if ((new = ft_strnew(ft_strlen(s))) == NULL)
 		return (NULL);
 	i = 0;
