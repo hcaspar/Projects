@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 14:10:26 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/18 16:55:27 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/18 19:09:44 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ double			ft_atof(const char *str)
 	nb = 0;
 	i = 0;
 	sign = 1;
+	if (!str)
+		return (0);
 	while (ft_isspace(str[i]) && !ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')

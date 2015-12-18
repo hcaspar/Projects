@@ -6,7 +6,7 @@
 #    By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 15:54:35 by hcaspar           #+#    #+#              #
-#    Updated: 2015/12/18 16:22:17 by hcaspar          ###   ########.fr        #
+#    Updated: 2015/12/18 19:07:00 by hcaspar          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ SRC =	ft_putchar.c	ft_putstr.c		ft_putendl.c	ft_putnbr.c		\
 		ft_strjoin.c	ft_strtrim.c	ft_strsplit.c	ft_itoa.c		\
 		ft_lstnew.c		ft_lstdelone.c	ft_lstdel.c		ft_lstmap.c		\
 		ft_lstadd.c		ft_lstiter.c	ft_strrev.c		ft_isspace.c	\
-		ft_pow.c		ft_atof.c
+		ft_pow.c		ft_atof.c		ft_strndup.c	ft_strlcpy.c
 
 OBJ = $(SRC:.c=.o)
 
