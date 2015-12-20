@@ -6,13 +6,13 @@
 #    By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/12 17:55:51 by hcaspar           #+#    #+#              #
-#    Updated: 2015/12/12 18:09:49 by hcaspar          ###   ########.fr        #
+#    Updated: 2015/12/20 16:24:54 by hcaspar          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME= fillit
 
-SRC=	fillit.c	more.c
+SRC=	fillit.c	more.c		even_more.c
 
 FLAGS= -Wall -Wextra -Werror
 
