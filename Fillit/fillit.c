@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:31:27 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/20 14:38:51 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/21 12:45:08 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,5 @@ int				main(int ac, char **av)
 	ft_check_map(ret, buf);
 	size = 4 * ((ret + 1) / 21);
 	ft_char_to_tab(size, buf);
+	return (0);
 }
