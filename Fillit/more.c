@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/21 16:19:43 by hcaspar          ###   ########.fr       */
+/*   Updated: 2015/12/21 17:31:33 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,25 @@ int			ft_assemble(char **grid, int size, char tab[size][5], int i)
 	t_compt2	g;
 
 	g.i = -1;
-	g.i2 = 0;
-	g.j2 = 0;
 	g.s = i;
 	while (++g.i != size)
 	{
+		g.i2 = 0;
+		g.j2 = 0;
 		g.j = -1;
 		while (++g.j != 4)
 			if (tab[g.i][g.j] == 'A' + g.i / 4)
 			{
 				g.b = 1;
 				g.c = 'A' + g.i / 4;
-				while (grid[g.i2][g.j2] != '.')
-					g.j2++;
+				while (g.i2 + 1 < i && grid[g.i2][g.j2] != '.')
+				{
+					g.j2 = 0;
+					while (grid[g.i2][g.j2] != '.' && grid[g.i2][g.j2])
+						g.j2++;
+					if (grid[g.i2][g.j2] == '\0')
+						g.i2++;
+				}
 				g = ft_place(grid, size, tab, g);
 				if (g.b != 4)
 					return (0);
