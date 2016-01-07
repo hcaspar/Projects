@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/07 17:03:59 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/07 18:38:27 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,43 +52,22 @@ int			ft_assemble(char **grid, int size, char tab[size][5], int i)
 	t_compt2	g;
 	t_compt2	g2;
 
-	g.i = -1;
-	g.s = i;
-	while (++g.i != size)
+	g = ft_struct_init(g, i);
+	while (g.i < size)
 	{
-		g.i2 = 0;
-		g.j2 = 0;
-		g.j = -1;
-		while (++g.j != 4)
-			if (tab[g.i][g.j] == 'A' + g.i / 4)
-			{
-				g.b = 1;
-				g.c = 'A' + g.i / 4;
-				while (g.i2 + 1 < i && grid[g.i2][g.j2] != '.')
-				{
-					g.j2 = 0;
-					while (grid[g.i2][g.j2] != '.' && grid[g.i2][g.j2] != '\0')
-						g.j2++;
-					if (grid[g.i2][g.j2] == '\0')
-						g.i2++;
-				}
-				g2 = g;
-				g2 = ft_check(grid, size, tab, g2);
-				if (g2.b == 4)
-				{
-					g = ft_place(grid, size, tab, g);
-					g.i = (g.i / 4) * 4 + 3;
-					g.j = 3;
-				}
-				else if (g2.b != 4 && g.i2 + 1 < i)
-				{
-					g.i2++;
-					g.j = -1;
-					g.j2 = 0;
-				}
-				else
-					return (0);
-			}
+		g = loop_tab(g, size, tab);
+		g = loop_grid(g, grid, i);
+		g2 = g;
+		g2 = ft_check(grid, size, tab, g2);
+		if (g2.b == 4)
+		{
+			g = ft_place(grid, size, tab, g);
+			g.i = (g.i / 4) * 4 + 4;
+			g.c = g.c + 1;
+		}
+		else
+			g.j2++;
+		g.b = 1;
 	}
 	ft_print_grid(grid);
 	return (1);

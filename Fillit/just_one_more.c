@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 15:30:17 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/07 16:05:03 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/07 18:23:37 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,17 @@ t_compt2	ft_check(char **grid, int size, char tab[size][5], t_compt2 g)
 	{
 		g = ft_trash32(grid, size, tab, g);
 	}
+	return (g);
+}
+
+t_compt2	ft_struct_init(t_compt2 g, int i)
+{
+	g.i = 0;
+	g.j = 0;
+	g.i2 = 0;
+	g.j2 = 0;
+	g.b = 1;
+	g.s = i;
+	g.c = 'A';
 	return (g);
 }
