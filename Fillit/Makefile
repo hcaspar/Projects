@@ -6,7 +6,7 @@
 #    By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/12 17:55:51 by hcaspar           #+#    #+#              #
-#    Updated: 2016/01/07 21:54:31 by hcaspar          ###   ########.fr        #
+#    Updated: 2016/01/07 22:18:18 by hcaspar          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME= fillit
 
 CC = gcc
 
-SRC=	fillit.c	more.c		even_more.c		just_one_more.c		last_one.c
+SRC=	fillit.c	more.c		even_more.c		last_one.c
 
 CFLAGS= -Wall -Wextra -Werror
 
