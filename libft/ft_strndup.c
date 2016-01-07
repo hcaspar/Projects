@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 18:07:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/18 18:13:55 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/07 13:14:28 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strndup(const char *s1, size_t n)
 {
 	char	*dup;
 	size_t	compt;
-	int		i;
+	sice_t	i;
 
 	i = ft_strlen(s1);
 	if (n < i)

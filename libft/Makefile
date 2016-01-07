@@ -6,11 +6,13 @@
 #    By: hcaspar <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 15:54:35 by hcaspar           #+#    #+#              #
-#    Updated: 2015/12/18 19:07:00 by hcaspar          ###   ########.fr        #
+#    Updated: 2016/01/07 13:14:16 by hcaspar          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
+
+CC = gcc
 
 SRC =	ft_putchar.c	ft_putstr.c		ft_putendl.c	ft_putnbr.c		\
 		ft_putchar_fd.c	ft_putstr_fd.c	ft_putendl_fd.c	ft_putnbr_fd.c	\
@@ -31,7 +33,7 @@ SRC =	ft_putchar.c	ft_putstr.c		ft_putendl.c	ft_putnbr.c		\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
