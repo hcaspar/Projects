@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2015/12/21 17:31:33 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/07 17:03:59 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		ft_free_tab(char **grid)
 int			ft_assemble(char **grid, int size, char tab[size][5], int i)
 {
 	t_compt2	g;
+	t_compt2	g2;
 
 	g.i = -1;
 	g.s = i;
@@ -66,16 +67,27 @@ int			ft_assemble(char **grid, int size, char tab[size][5], int i)
 				while (g.i2 + 1 < i && grid[g.i2][g.j2] != '.')
 				{
 					g.j2 = 0;
-					while (grid[g.i2][g.j2] != '.' && grid[g.i2][g.j2])
+					while (grid[g.i2][g.j2] != '.' && grid[g.i2][g.j2] != '\0')
 						g.j2++;
 					if (grid[g.i2][g.j2] == '\0')
 						g.i2++;
 				}
-				g = ft_place(grid, size, tab, g);
-				if (g.b != 4)
+				g2 = g;
+				g2 = ft_check(grid, size, tab, g2);
+				if (g2.b == 4)
+				{
+					g = ft_place(grid, size, tab, g);
+					g.i = (g.i / 4) * 4 + 3;
+					g.j = 3;
+				}
+				else if (g2.b != 4 && g.i2 + 1 < i)
+				{
+					g.i2++;
+					g.j = -1;
+					g.j2 = 0;
+				}
+				else
 					return (0);
-				g.j = 3;
-				g.i = (g.i / 4) * 4 + 3;
 			}
 	}
 	ft_print_grid(grid);
