@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/07 18:43:04 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/07 21:37:13 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,19 @@ t_compt2	loop_tab(t_compt2 g, int size, char tab[size][5])
 		g.i++;
 	}
 	return (g);
+}
+
+void		loop_erase(t_compt2 g, char **grid, int i)
+{
+	while (g.i2 < i)
+	{
+		while (g.j2 < i)
+		{
+			if (grid[g.i2][g.j2] == g.c)
+				grid[g.i2][g.j2] = '.';
+			g.j2++;
+		}
+		g.j2 = 0;
+		g.i2++;
+	}
 }
