@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/07 21:37:13 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 16:17:09 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_compt2	loop_tab(t_compt2 g, int size, char tab[size][5])
 {
 	while (g.i < (g.i / 4) * 4 + 4)
 	{
-		g.j = 0;
 		while (g.j < 4 && tab[g.i][g.j] != g.c)
 			g.j++;
 		if (tab[g.i][g.j] == g.c)
 			return (g);
+		g.j = 0;
 		g.i++;
 	}
 	return (g);
@@ -53,4 +53,13 @@ void		loop_erase(t_compt2 g, char **grid, int i)
 		g.j2 = 0;
 		g.i2++;
 	}
+}
+
+t_compt2	next_block(t_compt2 g)
+{
+	g.i = (g.i / 4) * 4 + 4;
+	g.c = g.c + 1;
+	g.i2 = 0;
+	g.j2 = 0;
+	return (g);
 }
