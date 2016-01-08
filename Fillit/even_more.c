@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:12:29 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 16:07:48 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 18:12:45 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ t_compt2	ft_struct_init(t_compt2 g, int i)
 	g.b = 1;
 	g.s = i;
 	g.c = 'A';
+	g.jpos = 0;
 	return (g);
 }

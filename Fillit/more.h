@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:18:36 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 17:16:59 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 18:41:18 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_compt2
 	char		c;
 	int			b;
 	int			s;
+	int			jpos;
 }				t_compt2;
 
 void			ft_print_error(void);

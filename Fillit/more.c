@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 17:23:21 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 19:02:59 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ int			ft_assemble(char **grid, int size, char tab[size][5], int i)
 		if (g2.b != 4)
 		{
 			loop_erase(g, grid, i);
+			g.j2++;
 			if (g2.i2 == i - 1 && g2.j2 == i - 1)
 			{
+				if (g.i == 0)
+					return (0);
 				g = prev_block(g);
 				loop_erase(g, grid, i);
+				g.j2 = g.jpos;
 			}
-			g.j2++;
 		}
 		else
 			g = next_block(g);
