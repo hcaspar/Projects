@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:18:36 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 16:17:56 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 17:16:59 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_compt2		ft_struct_init(t_compt2 g, int i);
 t_compt2		loop_grid(t_compt2 g, char **grid, int i);
 t_compt2		loop_tab(t_compt2 g, int size, char tab[size][5]);
 t_compt2		next_block(t_compt2 g);
+t_compt2		prev_block(t_compt2 g);
 void			loop_erase(t_compt2 g, char **grid, int i);
 
 #endif

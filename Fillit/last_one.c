@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 16:17:09 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/08 17:21:54 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,16 @@ t_compt2	next_block(t_compt2 g)
 	g.c = g.c + 1;
 	g.i2 = 0;
 	g.j2 = 0;
+	g.j = 0;
+	return (g);
+}
+
+t_compt2	prev_block(t_compt2 g)
+{
+	g.i = (g.i / 4) * 4 - 4;
+	g.c = g.c - 1;
+	g.i2 = 0;
+	g.j2 = 0;
+	g.j = 0;
 	return (g);
 }
