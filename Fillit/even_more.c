@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 16:12:29 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 18:12:45 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/09 20:02:53 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ t_compt2	ft_trash3(char **grid, int size, char tab[size][5], t_compt2 g)
 
 t_compt2	ft_place(char **grid, int size, char tab[size][5], t_compt2 g)
 {
+	if (g.i2 == g.s && g.j2 == 0 && g.b == 1)
+	{
+		g.b = -1;
+		return (g);
+	}
 	grid[g.i2][g.j2] = g.c;
 	if (g.b < 4 && tab[g.i][g.j + 1] == g.c && grid[g.i2][g.j2 + 1] == '.')
 		g = ft_trash1(grid, size, tab, g);
@@ -75,5 +80,6 @@ t_compt2	ft_struct_init(t_compt2 g, int i)
 	g.s = i;
 	g.c = 'A';
 	g.jpos = 0;
+	g.end = 1;
 	return (g);
 }

@@ -6,17 +6,17 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 18:53:26 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/09 20:30:08 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more.h"
 
-t_compt2	loop_grid(t_compt2 g, char **grid, int i)
+t_compt2	loop_grid(t_compt2 g, char **grid)
 {
-	while (g.i2 < i)
+	while (g.i2 < g.s)
 	{
-		while (g.j2 < i && grid[g.i2][g.j2] != '.')
+		while (g.j2 < g.s && grid[g.i2][g.j2] != '.')
 			g.j2++;
 		if (grid[g.i2][g.j2] == '.')
 			return (g);
@@ -40,28 +40,32 @@ t_compt2	loop_tab(t_compt2 g, int size, char tab[size][5])
 	return (g);
 }
 
-void		loop_erase(t_compt2 g, char **grid, int i)
+void		loop_erase(t_compt2 g, char **grid)
 {
-	while (g.i2 < i)
+	g.i2 = 0;
+	while (g.i2 < g.s)
 	{
-		while (g.j2 < i)
+		g.j2 = 0;
+		while (g.j2 < g.s)
 		{
 			if (grid[g.i2][g.j2] == g.c)
 				grid[g.i2][g.j2] = '.';
 			g.j2++;
 		}
-		g.j2 = 0;
 		g.i2++;
 	}
 }
 
 t_compt2	next_block(t_compt2 g)
 {
+	g.jpos = g.j2;
+	g.ipos = g.i2;
 	g.i = (g.i / 4) * 4 + 4;
+	g.j = 0;
 	g.c = g.c + 1;
 	g.i2 = 0;
 	g.j2 = 0;
-	g.j = 0;
+	g.b = 1;
 	return (g);
 }
 
@@ -72,6 +76,6 @@ t_compt2	prev_block(t_compt2 g)
 	g.i2 = 0;
 	g.j2 = 0;
 	g.j = 0;
-	g.jpos++;
+	g.b = 1;
 	return (g);
 }

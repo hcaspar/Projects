@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/08 19:02:59 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/09 20:23:04 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,45 +47,53 @@ void		ft_free_tab(char **grid)
 	grid = NULL;
 }
 
-int			ft_assemble(char **grid, int size, char tab[size][5], int i)
+t_compt2		ft_assemble(char **grid, int size, char tab[size][5], t_compt2 g)
 {
-	t_compt2	g;
-	t_compt2	g2;
-
-	g = ft_struct_init(g, i);
-	while (g.i < size)
+	while (g.b != 4)
 	{
 		g = loop_tab(g, size, tab);
-		g = loop_grid(g, grid, i);
-		g2 = ft_place(grid, size, tab, g);
-		if (g2.b != 4)
+		g = loop_grid(g, grid);
+		g = ft_place(grid, size, tab, g);
+		ft_print_grid(grid);
+		ft_putchar('\n');
+		if (g.b == 4 && (g.i * 4) / 4 + 4 < size)
 		{
-			loop_erase(g, grid, i);
-			g.j2++;
-			if (g2.i2 == i - 1 && g2.j2 == i - 1)
-			{
-				if (g.i == 0)
-					return (0);
-				g = prev_block(g);
-				loop_erase(g, grid, i);
-				g.j2 = g.jpos;
-			}
-		}
-		else
 			g = next_block(g);
-		g.b = 1;
+			g = ft_assemble(grid, size, tab, g);
+		}
+		if (g.b != 4)
+		{
+			if (g.b == -1)
+			{
+				if (g.i / 4 == 0)
+				{
+					g.end = 0;
+					return (g);
+				}
+				else
+				{
+					g = prev_block(g);
+					g.j2 = g.jpos;
+					g.i2 = g.ipos;
+				}
+			}
+			loop_erase(g, grid);
+			g.j2++;
+			g.b = 1;
+		}
 	}
-	ft_print_grid(grid);
-	return (1);
+	return (g);
 }
 
 void		ft_create_map(int size, char tab[size][5], int i)
 {
 	t_compt	g;
+	t_compt2 g2;
 	char	**grid;
 
 	while (i * i < size)
 		i++;
+	g2 = ft_struct_init(g2, i);
 	g.i = -1;
 	if (!(grid = (char**)malloc(sizeof(char*) * (i + 1))))
 		ft_print_error();
@@ -98,11 +106,15 @@ void		ft_create_map(int size, char tab[size][5], int i)
 			grid[g.i][g.j] = '.';
 	}
 	grid[g.i] = NULL;
-	if (ft_assemble(grid, size, tab, i) == 0)
+	g2 = ft_assemble(grid, size, tab, g2);
+	if (g2.end == 0)
 	{
 		ft_free_tab(grid);
 		ft_create_map(size, tab, i + 1);
 	}
 	else
+	{
+		ft_print_grid(grid);
 		ft_free_tab(grid);
+	}
 }
