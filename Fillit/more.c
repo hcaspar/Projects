@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/11 12:38:08 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/11 13:38:11 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,13 @@ void		ft_free_tab(char **grid)
 	grid = NULL;
 }
 
-t_compt2		ft_assemble(char **grid, int size, char tab[size][5], t_compt2 g)
+t_compt2	ft_assemble(char **grid, int size, char tab[size][5], t_compt2 g)
 {
 	while (g.b != 4)
 	{
 		g = loop_tab(g, size, tab);
 		g = loop_grid(g, grid);
 		g = ft_place(grid, size, tab, g);
-		ft_print_grid(grid);
-		ft_putchar('\n');
 		if (g.b == 4 && (g.i * 4) / 4 + 4 < size)
 		{
 			g = next_block(g);

@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/11 12:32:00 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/11 13:33:15 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void		loop_erase(t_compt2 g, char **grid)
 
 t_compt2	next_block(t_compt2 g)
 {
-	g.jpos = g.j2;
-	g.ipos = g.i2;
 	g.i = (g.i / 4) * 4 + 4;
 	g.j = 0;
 	g.c = g.c + 1;

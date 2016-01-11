@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:18:36 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/11 12:31:48 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/11 13:33:29 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ typedef struct	s_compt2
 	char		c;
 	int			b;
 	int			s;
-	int			jpos;
-	int			ipos;
 	int			end;
 }				t_compt2;
 
