@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 17:24:31 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/09 20:23:04 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/11 12:38:08 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ t_compt2		ft_assemble(char **grid, int size, char tab[size][5], t_compt2 g)
 					return (g);
 				}
 				else
-				{
-					g = prev_block(g);
-					g.j2 = g.jpos;
-					g.i2 = g.ipos;
-				}
+					g = prev_block(g, grid);
 			}
 			loop_erase(g, grid);
 			g.j2++;
@@ -87,9 +83,9 @@ t_compt2		ft_assemble(char **grid, int size, char tab[size][5], t_compt2 g)
 
 void		ft_create_map(int size, char tab[size][5], int i)
 {
-	t_compt	g;
-	t_compt2 g2;
-	char	**grid;
+	t_compt		g;
+	t_compt2	g2;
+	char		**grid;
 
 	while (i * i < size)
 		i++;

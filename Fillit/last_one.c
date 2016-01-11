@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:54:18 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/09 20:30:08 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/11 12:32:00 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_compt2	next_block(t_compt2 g)
 	return (g);
 }
 
-t_compt2	prev_block(t_compt2 g)
+t_compt2	prev_block(t_compt2 g, char **grid)
 {
 	g.i = (g.i / 4) * 4 - 4;
 	g.c = g.c - 1;
@@ -77,5 +77,13 @@ t_compt2	prev_block(t_compt2 g)
 	g.j2 = 0;
 	g.j = 0;
 	g.b = 1;
+	while (g.i2 < g.s && grid[g.i2][g.j2] != g.c)
+	{
+		g.j2 = 0;
+		while (g.j2 < g.s && grid[g.i2][g.j2] != g.c)
+			g.j2++;
+		if (grid[g.i2][g.j2] != g.c)
+			g.i2++;
+	}
 	return (g);
 }
