@@ -6,41 +6,30 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:48:45 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/12 15:10:47 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/12 17:14:54 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*find_end_of_line(char *buf)
-{
-	int		i;
-
-	i = 0;
-	while (buf[i] && buf[i] != '\n')
-		i++;
-	buf[i] = '\0';
-	return (buf);
-}
-
 void		ft_realloc(char **line, int len)
 {
-	char	*new;
-	int		i;
+	char			*new;
+	int				i;
 
 	new = *line;
 	free(*line);
 	*line = (char*)malloc(sizeof(char) * (len + ft_strlen(new)) + 1);
 	i = -1;
 	while ((new)[++i])
-		(*line)[i] = new[i]; 
+		(*line)[i] = new[i];
 	(*line)[i] = '\0';
 }
 
 void		ft_join(char buf[BUFF_SIZE + 1], char **line)
 {
-	int		len;
-	int		i;
+	int				len;
+	int				i;
 
 	i = -1;
 	len = 0;
@@ -58,9 +47,8 @@ void		ft_join(char buf[BUFF_SIZE + 1], char **line)
 
 int			buf_read(int fd, char **line)
 {
-	int		i;
-	int		ret;
-	char	buf[BUFF_SIZE + 1];
+	int				ret;
+	char			buf[BUFF_SIZE + 1];
 
 	*line = NULL;
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
@@ -70,8 +58,31 @@ int			buf_read(int fd, char **line)
 		buf[ret] = '\0';
 		ft_join(buf, line);
 	}
-//	join = find_end_of_line(join);
-	i = -1;
+	if (ret == 0)
+		return (0);
+	return (ret);
+}
+
+int			find_end_of_line(char **line)
+{
+	static int		i = -1;
+	int				j;
+	int				k;
+	char			*tmp;
+
+	i++;
+	k = i;
+	while ((*line)[i] && (*line)[i] != '\n')
+		i++;
+	j = i - k;
+	tmp = (char*)malloc(sizeof(char) * j + 1);
+	tmp[j] = '\0';
+	while (--j != -1)
+		tmp[j] = (*line)[k + j];
+	ft_putendl(tmp);
+	free(tmp);
+	if ((*line)[i] == '\0')
+		return (0);
 	return (1);
 }
 
@@ -79,8 +90,10 @@ int			get_next_line(int const fd, char **line)
 {
 	int		ret;
 
+	ret = -1;
 	if ((ret = buf_read(fd, line)) == -1)
 		return (ret);
-	ft_putendl(*line);
-	return (0);
+	ret = find_end_of_line(line);
+//	ft_putendl(*line);
+	return (ret);
 }
