@@ -6,11 +6,34 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:48:45 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/12 17:14:54 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/13 13:41:05 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int			find_end_of_line(char **line)
+{
+	static int		i = -1;
+	int				j;
+	int				k;
+	char			*tmp;
+
+	i++;
+	k = i;
+	while ((*line)[i] && (*line)[i] != '\n')
+		i++;
+	j = i - k;
+	tmp = (char*)malloc(sizeof(char) * j + 1);
+	tmp[j] = '\0';
+	while (--j != -1)
+		tmp[j] = (*line)[k + j];
+	ft_putendl(tmp);
+	free(tmp);
+	if ((*line)[i] == '\0')
+		return (0);
+	return (1);
+}
 
 void		ft_realloc(char **line, int len)
 {
@@ -61,29 +84,6 @@ int			buf_read(int fd, char **line)
 	if (ret == 0)
 		return (0);
 	return (ret);
-}
-
-int			find_end_of_line(char **line)
-{
-	static int		i = -1;
-	int				j;
-	int				k;
-	char			*tmp;
-
-	i++;
-	k = i;
-	while ((*line)[i] && (*line)[i] != '\n')
-		i++;
-	j = i - k;
-	tmp = (char*)malloc(sizeof(char) * j + 1);
-	tmp[j] = '\0';
-	while (--j != -1)
-		tmp[j] = (*line)[k + j];
-	ft_putendl(tmp);
-	free(tmp);
-	if ((*line)[i] == '\0')
-		return (0);
-	return (1);
 }
 
 int			get_next_line(int const fd, char **line)
