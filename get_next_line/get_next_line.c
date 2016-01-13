@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:48:45 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 13:41:05 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/13 15:01:55 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ int			find_end_of_line(char **line)
 
 	i++;
 	k = i;
-	while ((*line)[i] && (*line)[i] != '\n')
+	tmp = (*line);
+	free(*line);
+	*line = NULL;
+	while (tmp[i] && tmp[i] != '\n')
 		i++;
 	j = i - k;
-	tmp = (char*)malloc(sizeof(char) * j + 1);
-	tmp[j] = '\0';
+	*line = (char*)malloc(sizeof(char) * j + 1);
+	(*line)[j] = '\0';
 	while (--j != -1)
-		tmp[j] = (*line)[k + j];
-	ft_putendl(tmp);
-	free(tmp);
+		(*line)[j] = tmp[k + j];
+//	free(tmp);
 	if ((*line)[i] == '\0')
 		return (0);
 	return (1);
@@ -42,9 +44,10 @@ void		ft_realloc(char **line, int len)
 
 	new = *line;
 	free(*line);
+	*line = NULL;
 	*line = (char*)malloc(sizeof(char) * (len + ft_strlen(new)) + 1);
 	i = -1;
-	while ((new)[++i])
+	while (new[++i])
 		(*line)[i] = new[i];
 	(*line)[i] = '\0';
 }
@@ -94,6 +97,5 @@ int			get_next_line(int const fd, char **line)
 	if ((ret = buf_read(fd, line)) == -1)
 		return (ret);
 	ret = find_end_of_line(line);
-//	ft_putendl(*line);
 	return (ret);
 }

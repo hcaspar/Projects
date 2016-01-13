@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:55:04 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 13:31:28 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/13 14:42:33 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# define BUFF_SIZE 1
+# define BUFF_SIZE 2
 
 int		get_next_line(int const fd, char **line);
 
