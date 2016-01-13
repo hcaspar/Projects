@@ -6,96 +6,95 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:48:45 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 15:01:55 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/13 18:37:40 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			find_end_of_line(char **line)
+int			find_end_of_line(char **line, char **text)
 {
-	static int		i = -1;
+	int				i;
 	int				j;
-	int				k;
 	char			*tmp;
 
-	i++;
-	k = i;
-	tmp = (*line);
-	free(*line);
-	*line = NULL;
-	while (tmp[i] && tmp[i] != '\n')
+	i = 0;
+	while ((*text)[i] && (*text)[i] != '\n')
 		i++;
-	j = i - k;
-	*line = (char*)malloc(sizeof(char) * j + 1);
+	*line = (char*)malloc(sizeof(char) * i + 1);
+	j = -1;
+	while ((*text)[++j] && (*text)[j] != '\n')
+		(*line)[j] = (*text)[j];
 	(*line)[j] = '\0';
-	while (--j != -1)
-		(*line)[j] = tmp[k + j];
-//	free(tmp);
-	if ((*line)[i] == '\0')
+	if ((*text)[j] == '\0')
 		return (0);
+	tmp = *text;
+	free(*text);
+//	*text = (char*)malloc(sizeof(char) * i
+	ft_putendl(tmp);
 	return (1);
 }
 
-void		ft_realloc(char **line, int len)
+void		ft_realloc(char **text, int len)
 {
 	char			*new;
 	int				i;
 
-	new = *line;
-	free(*line);
-	*line = NULL;
-	*line = (char*)malloc(sizeof(char) * (len + ft_strlen(new)) + 1);
+	new = *text;
+	free(*text);
+	*text = NULL;
+	*text = (char*)malloc(sizeof(char) * (len + ft_strlen(new)) + 1);
 	i = -1;
 	while (new[++i])
-		(*line)[i] = new[i];
-	(*line)[i] = '\0';
+		(*text)[i] = new[i];
+	(*text)[i] = '\0';
 }
 
-void		ft_join(char buf[BUFF_SIZE + 1], char **line)
+void		ft_join(char buf[BUFF_SIZE + 1], int ret, char **text)
 {
 	int				len;
 	int				i;
 
 	i = -1;
 	len = 0;
-	if (*line == NULL)
-		*line = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (*text == NULL)
+		*text = (char*)malloc(sizeof(char) * (ret + 1));
 	else
 	{
-		ft_realloc(line, BUFF_SIZE);
-		len = ft_strlen(*line);
+		ft_realloc(text, ret);
+		len = ft_strlen(*text);
 	}
 	while (buf[++i])
-		(*line)[len + i] = buf[i];
-	(*line)[len + i] = '\0';
+		(*text)[len + i] = buf[i];
+	(*text)[len + i] = '\0';
 }
 
-int			buf_read(int fd, char **line)
+int			buf_read(int fd, char **text)
 {
 	int				ret;
 	char			buf[BUFF_SIZE + 1];
 
-	*line = NULL;
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		if (ret == -1)
 			return (-1);
 		buf[ret] = '\0';
-		ft_join(buf, line);
+		ft_join(buf, ret, text);
 	}
-	if (ret == 0)
-		return (0);
 	return (ret);
 }
 
 int			get_next_line(int const fd, char **line)
 {
-	int		ret;
+	static char		*text = NULL;
+	int				ret;
 
 	ret = -1;
-	if ((ret = buf_read(fd, line)) == -1)
-		return (ret);
-	ret = find_end_of_line(line);
+	if (text == NULL)
+		if ((ret = buf_read(fd, &text)) == -1)
+			return (ret);
+	ret = find_end_of_line(line, &text);
+	if (ret == 0 && text)
+		free(text);
 	return (ret);
 }
