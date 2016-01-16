@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:48:45 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 18:37:40 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/16 10:39:33 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ int			find_end_of_line(char **line, char **text)
 	if ((*text)[j] == '\0')
 		return (0);
 	tmp = *text;
-	free(*text);
-//	*text = (char*)malloc(sizeof(char) * i
-	ft_putendl(tmp);
+	j = ft_strlen(*text) - i - 1;
+	*text = (char*)malloc(sizeof(char) * j + 1);
+	j = -1;
+	while (tmp[++i])
+		(*text)[++j] = tmp[i];
+	(*text)[j + 1] = '\0';
+	free(tmp);
 	return (1);
 }
 
@@ -41,13 +45,13 @@ void		ft_realloc(char **text, int len)
 	int				i;
 
 	new = *text;
-	free(*text);
 	*text = NULL;
 	*text = (char*)malloc(sizeof(char) * (len + ft_strlen(new)) + 1);
 	i = -1;
 	while (new[++i])
 		(*text)[i] = new[i];
 	(*text)[i] = '\0';
+	free(new);
 }
 
 void		ft_join(char buf[BUFF_SIZE + 1], int ret, char **text)

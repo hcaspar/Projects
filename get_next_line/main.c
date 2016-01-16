@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:00:14 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 18:22:57 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/16 10:25:09 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int ac, char **av)
 	while (i == 1)
 	{
 		i = get_next_line(fd, &line);
-//		ft_putendl(line);
+		ft_putendl(line);
 		free(line);
 	}
 	close(fd);
