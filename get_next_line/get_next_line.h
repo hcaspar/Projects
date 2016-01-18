@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 14:55:04 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/01/13 17:36:34 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/01/18 17:32:33 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,17 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "libft/includes/libft.h"
 # define BUFF_SIZE 1
 
-int		get_next_line(int const fd, char **line);
+typedef struct			s_link
+{
+	int					fd;
+	int					eof;
+	char				*text;
+	struct s_link		*next;
+}						t_link;
+
+int						get_next_line(int const fd, char **line);
 
 #endif
