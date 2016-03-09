@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_length.c                                 :+:      :+:    :+:   */
+/*   ft_printf_hexa.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 03:00:39 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 18:55:55 by hcaspar          ###   ########.fr       */
+/*   Created: 2016/02/22 20:03:09 by hcaspar           #+#    #+#             */
+/*   Updated: 2016/03/07 18:55:24 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_printf_length(int i, int nb, int *n)
+int			ft_printf_hexa(void *addr, int i, int x)
 {
-	char	c;
+	long	q;
 
-	if (nb >= 10)
+	q = (long)addr;
+	if (x == 1)
+		write(1, "0x", 2);
+	if (q > 15)
 	{
-		ft_printf_length(i, nb / 10, n);
-		nb = nb % 10;
+		ft_printf_hexa((void*)(q / 16), i, 0);
+		q = q % 16;
 	}
-	(*n)++;
-	c = nb + 48;
-	write(1, &c, 1);
+	if (q >= 10)
+		q = q + 39;
+	q = q + 48;
+	write(1, &q, 1);
 	return (i + 1);
 }

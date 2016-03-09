@@ -6,15 +6,15 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 23:16:32 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/02/02 03:51:09 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/03/07 18:54:59 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_printf_char(char c, int i, int *n)
+int		ft_printf_char(int c, int i, int *n)
 {
 	write(1, &c, 1);
 	(*n)++;
-	return (i + 2);
+	return (i + 1);
 }

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_length.c                                 :+:      :+:    :+:   */
+/*   ft_printf_char_uni.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 03:00:39 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 18:55:55 by hcaspar          ###   ########.fr       */
+/*   Created: 2016/02/05 04:23:15 by hcaspar           #+#    #+#             */
+/*   Updated: 2016/03/07 23:48:36 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_printf_length(int i, int nb, int *n)
+int		ft_printf_char_uni(wint_t c, int i, int *n)
 {
-	char	c;
-
-	if (nb >= 10)
-	{
-		ft_printf_length(i, nb / 10, n);
-		nb = nb % 10;
-	}
+	write(1, &c, sizeof(wint_t));
 	(*n)++;
-	c = nb + 48;
-	write(1, &c, 1);
 	return (i + 1);
 }
