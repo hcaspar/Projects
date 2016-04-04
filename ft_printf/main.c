@@ -6,7 +6,7 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 20:48:17 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 23:48:18 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/04/04 22:39:49 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@
 
 int			main(void)
 {
-	char	c;
 	char	*s;
 	int		d;
 	wint_t	t;
 	void	*p;
+	wchar_t	*u;
 
-	c = 'b';
-	d = 10;
-	p = &c;
-	t = L'繁';
+	d = 18;
+	p = &t;
+	u = L"لحم خنزير";
+	t = L'ل';
 	s = "je suis bon";
 	setlocale(LC_CTYPE, "");
-	printf("%C\n", t);
-	ft_printf("%C\n", t);
+	d = printf("1:%d\n", 42);
+	printf("%d\n", d);
+	d = ft_printf("2:%d\n", 42);
+	printf("%d\n", d);
 	return (0);
 }

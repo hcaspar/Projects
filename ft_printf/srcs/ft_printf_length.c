@@ -6,23 +6,30 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 03:00:39 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 18:55:55 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/04/04 22:36:00 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_printf_length(int i, int nb, int *n)
+void		ft_printf_length(int nb, t_struct *details)
 {
 	char	c;
 
 	if (nb >= 10)
 	{
-		ft_printf_length(i, nb / 10, n);
+		ft_printf_length(nb / 10, details);
 		nb = nb % 10;
 	}
-	(*n)++;
+	details->n++;
 	c = nb + 48;
 	write(1, &c, 1);
-	return (i + 1);
+}
+
+void		ft_conv_porn(t_struct *details)
+{
+	if (details->conv == 'n')
+		ft_printf_length(details->n, details);
+	else
+		ft_conv_percent(details);
 }

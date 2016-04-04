@@ -6,18 +6,18 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 14:54:07 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 23:48:17 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/04/04 22:32:09 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			ft_printf_get_num(const char *format, int *i)
+static int		ft_printf_get_num(const char *format, int *i)
 {
-	int		j;
-	int		width;
-	int		str_width;
-	char	*str;
+	int			j;
+	int			width;
+	int			str_width;
+	char		*str;
 
 	str_width = (*i);
 	while (format[str_width] >= '0' && format[str_width] <= '9')
@@ -41,90 +41,102 @@ int			ft_printf_get_num(const char *format, int *i)
 	return (width);
 }
 
-int			ft_printf_details(const char *format, int i, t_struct *details)
+static int		ft_get_mod(const char *format, int i, t_struct *details)
 {
-	if (format[i] == '-' || format[i] == '+' || format[i] == ' ' ||	\
-		format[i] == '#' || format[i] == '0')
-		details->flag = format[i++];
-	if (format[i] >= '0' && format[i] <= '9')
-		details->width = ft_printf_get_num(format, &i);
-	if (format[i] == '.')
+	while (format[i] == 'h' || format[i] == 'l' || format[i] == 'j'\
+			|| format[i] == 'z')
 	{
-		i++;
-		details->precision = ft_printf_get_num(format, &i);
+		if (format[i] == 'h' && format[i + 1] == 'h' && (i = i + 2))
+			details->mod = 'h' + 'h';
+		else if (format[i] == 'h' && ++i)
+			details->mod = 'h';
+		else if (format[i] == 'l' && format[i + 1] == 'l' && (i = i + 2))
+			details->mod = 'l' + 'l';
+		else if (format[i] == 'l' && ++i)
+			details->mod = 'l';
+		else if (format[i] == 'j' && ++i)
+			details->mod = 'j';
+		else if (format[i] == 'z' && ++i)
+			details->mod = 'z';
 	}
 	return (i);
 }
 
-int			ft_printf(const char *format, ...)
+static int		ft_details(const char *format, int i, t_struct *details)
+{
+	while (format[i] == '-' || format[i] == '+' || format[i] == ' ' || \
+			format[i] == '#' || format[i] == '0')
+	{
+		details->noflag = 0;
+		if (format[i] == '-' && ++i)
+			details->minus = 1;
+		if (format[i] == '+' && ++i)
+			details->plus = 1;
+		if (format[i] == ' ' && ++i)
+			details->space = 1;
+		if (format[i] == '#' && ++i)
+			details->diese = 1;
+		if (format[i] == '0' && ++i && !details->minus)
+			details->zero = 1;
+	}
+	if (format[i] >= '0' && format[i] <= '9')
+		details->width = ft_printf_get_num(format, &i);
+	if (format[i] == '.' && ++i)
+		details->precision = ft_printf_get_num(format, &i);
+	i = ft_get_mod(format, i, details);
+	return (i);
+}
+
+static int		ft_init(const char *format, int i, t_struct *details)
+{
+	int			j;
+
+	details->diese = 0;
+	details->plus = 0;
+	details->minus = 0;
+	details->space = 0;
+	details->zero = 0;
+	details->noflag = 1;
+	details->mod = 0;
+	details->width = 0;
+	details->precision = -1;
+	details->point = 0;
+	details->sign = 0;
+	details->digit = 0;
+	details->base = 16;
+	j = i;
+	while (format[i] && format[i] != '%')
+		i++;
+	write(1, &format[j], i - j);
+	details->n = details->n + (i - j);
+	return (i);
+}
+
+int				ft_printf(const char *format, ...)
 {
 	int			i;
-	int			j;
 	int			n;
-	int			d;
-	char		*s;
 	va_list		ap;
 	t_struct	*details;
 
 	i = 0;
-	n = 0;
 	details = (t_struct*)malloc(sizeof(t_struct));
+	details->n = 0;
 	va_start(ap, format);
 	while (format[i])
 	{
-		details->precision = -1;
-		details->width = 0;
-		details->flag = 0;
-		j = i;
-		while (format[i] && format[i] != '%')
-			i++;
-		write(1, &format[j], i - j);
-		n = n + (i - j);
+		i = ft_init(format, i, details);
 		if (format[i] == '%')
 		{
-			i =	ft_printf_details(format, i + 1, details);
+			i = ft_details(format, i + 1, details);
 			details->conv = format[i];
-			if (format[i] == '%')
-			{
-				if (details->flag == 0 || details->flag == '0')
-					n = ft_printf_pad(1, n, details);
-				i = ft_printf_percent(i, &n);
-				if (details->flag == '-')
-					n = ft_printf_pad(1, n, details);
-			}
-			if (format[i] == 'n')
-				i = ft_printf_length(i, n, &n);
-			if (format[i] == 'c')
-				i = ft_printf_char(va_arg(ap, int), i, &n);
-			if (format[i] == 'C')
-				i = ft_printf_char_uni(va_arg(ap, wint_t), i, &n);
-			if (format[i] == 'd' || format[i] == 'x' ||\
-				format[i] == 'o' || format[i] == 'X')
-			{
-				d = va_arg(ap, int);
-				if (details->flag == 0 || details->flag == '0')
-					n = ft_printf_pad(d, n, details);
-				i = ft_printf_int(d, i, &n, details);
-				if (details->flag == '-')
-					n = ft_printf_pad(d, n, details);
-			}
-			if (format[i] == 's')
-			{
-				s = va_arg(ap, char*);
-				if (details->flag == 0 || details->flag == '0')
-					n = ft_printf_pad_string(s, n, details);
-				i = ft_printf_string(s, i, &n, details);
-				if (details->flag == '-')
-					n = ft_printf_pad_string(s, n, details);
-			}
-			if (format[i] == 'S')
-			{
-				
-			}
-			if (format[i] == 'p')
-				i = ft_printf_hexa(va_arg(ap, void*), i, 1);
+			if ((format[i] == '%' || format[i] == 'n') && ++i)
+				ft_conv_porn(details);
+			else if (format[i] != '\0' && ++i && ft_noconv(details))
+				ft_casts(va_arg(ap, void*), details);
 		}
 	}
+	n = details->n;
 	free(details);
 	return (n);
 }

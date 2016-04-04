@@ -6,15 +6,14 @@
 /*   By: hcaspar <hcaspar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 02:40:09 by hcaspar           #+#    #+#             */
-/*   Updated: 2016/03/07 18:56:09 by hcaspar          ###   ########.fr       */
+/*   Updated: 2016/03/20 18:52:18 by hcaspar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_printf_percent(int i, int *n)
+void	ft_printf_percent(t_struct *details)
 {
 	write(1, "%", 1);
-	(*n)++;
-	return (i + 1);
+	details->n++;
 }
